@@ -149,9 +149,16 @@ public class DoublyLinkedList<T> implements ListOf<T> {
 
     public T get(Cursor<T> c) throws Exception {
 
-    	throw nullPointerException;
+    	throw new NullPointerException("valid and associated");
     	DoublyLinkedListCursor<T> d = (DoublyLinkedListCursor<T>) c;
-    	return (T) d.pos;
+    	try{
+    		return (T) d.pos;
+    	}
+    	catch(NullPointerException e){
+    		System.out.println("is valid and associated with this list" + e);
+    	}
+    	
+    	
 
         //what is before the curser it potints right to a pos
     } // get
