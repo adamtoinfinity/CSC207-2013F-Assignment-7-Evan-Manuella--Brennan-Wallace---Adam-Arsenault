@@ -122,7 +122,11 @@ public class DoublyLinkedList<T> implements ListOf<T> {
     } // delete(Cursor)
 
     public Cursor<T> front() throws Exception {
-        throw new UnsupportedOperationException("STUB");
+    	if (front == null){
+    		throw new Exception("there is no list");
+    	}
+    	DoublyLinkedListCursor toReturn = new DoublyLinkedListCursor(front);
+    	return (Cursor) toReturn;
     } // front()
 
     public void advance(Cursor<T> c) throws Exception {
@@ -149,13 +153,13 @@ public class DoublyLinkedList<T> implements ListOf<T> {
 
     public T get(Cursor<T> c) throws Exception {
 
-    	throw new NullPointerException("valid and associated");
     	DoublyLinkedListCursor<T> d = (DoublyLinkedListCursor<T>) c;
     	try{
     		return (T) d.pos;
     	}
     	catch(NullPointerException e){
     		System.out.println("is valid and associated with this list" + e);
+    		return null;
     	}
     	
     	
@@ -219,22 +223,21 @@ public class DoublyLinkedList<T> implements ListOf<T> {
      * Determine if one iterator precedes another iterator.
      */
     public boolean precedes(Cursor<T> c1, Cursor<T> c2) throws Exception {
-        new Node current = this.front;
-        //the order of teh ifs maters
+       Node<T> current;
+       current = this.front;
+       DoublyLinkedListCursor<T> d1 = (DoublyLinkedListCursor<T>) c1;
+       DoublyLinkedListCursor<T> d2 = (DoublyLinkedListCursor<T>) c2;
         while (current != null){
-        	if (current == c2.pos){
+        	if (current == d2.pos){
         		return false;
         	}
-        	else if (current == c1.pos){
+        	else if (current == d1.pos){
         		return true;
         	}
         	current = current.next;                          
         }
-        return false;
-        /*
-         * We may want to throw some errors
-         * 
-         */
+        throw new Exception("Cursor(s) do not seem to relate to this list");
+        
         
     } // precedes(Cursor, Cursor)
 } // class DoublyLinkedList
