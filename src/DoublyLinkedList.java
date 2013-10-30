@@ -120,13 +120,25 @@ public class DoublyLinkedList<T> implements ListOf<T> {
     } // front()
 
     public void advance(Cursor<T> c) throws Exception {
-        	c.pos = c.pos.next;
+    	DoublyLinkedListCursor<T> d = (DoublyLinkedListCursor<T>) c;
+    	try{
+    		d.pos = d.pos.next;
+    	}
+    	catch(NullPointerException e){
+    		System.out.println("There is not a subsquent node" + e);
+    	}
+    	
         	//how do we throw an exception if pos.next is null, lets use has next instead
     } // advance(Cursor)
 
     public void retreat(Cursor<T> c) throws Exception {
-        c.pos = c.pos.prev;
-        //same deal as advance, i hate exceptions i know its easy but im not sure what a good google would be
+    	DoublyLinkedListCursor<T> d = (DoublyLinkedListCursor<T>) c;
+    	try{
+    		d.pos = d.pos.prev;
+    	}
+    	catch(NullPointerException e){
+    		System.out.println("There is not a previous node" + e);
+    	}
     } // retreat(Cursor)
 
     public T get(Cursor<T> c) throws Exception {
