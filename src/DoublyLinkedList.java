@@ -112,7 +112,13 @@ public class DoublyLinkedList<T> implements ListOf<T> {
 
 
     public void delete(Cursor<T> c) throws Exception {
-        throw new UnsupportedOperationException("STUB");
+    	DoublyLinkedListCursor<T> d = (DoublyLinkedListCursor<T>) c;
+    	try{
+    	d.pos.next = d.pos.next.next;
+    	}
+    	catch (NullPointerException e){
+    		System.out.println("There is no node to delete" + e);
+    	}
     } // delete(Cursor)
 
     public Cursor<T> front() throws Exception {
@@ -142,16 +148,22 @@ public class DoublyLinkedList<T> implements ListOf<T> {
     } // retreat(Cursor)
 
     public T get(Cursor<T> c) throws Exception {
-        throw new UnsupportedOperationException("STUB");
+
+    	throw nullPointerException;
+    	DoublyLinkedListCursor<T> d = (DoublyLinkedListCursor<T>) c;
+    	return (T) d.pos;
+
         //what is before the curser it potints right to a pos
     } // get
 
     public T getPrev(Cursor<T> c) throws Exception {
-        throw new UnsupportedOperationException("STUB");
+    	DoublyLinkedListCursor<T> d = (DoublyLinkedListCursor<T>) c;
+    	return (T) d.pos.prev;
     } // getPrev(Cursor)
 
     public boolean hasNext(Cursor<T> c) {
-        if (c.pos.next != null){
+    	DoublyLinkedListCursor<T> d = (DoublyLinkedListCursor<T>) c;
+    	if (d.pos.next != null){
         	return true;
         }
         else {
@@ -160,7 +172,8 @@ public class DoublyLinkedList<T> implements ListOf<T> {
     } // hasNext
 
     public boolean hasPrev(Cursor<T> c) {
-        if (c.pos.prev != null){
+    	DoublyLinkedListCursor<T> d = (DoublyLinkedListCursor<T>) c;
+    	if (d.pos.prev != null){
         	return true;
         }
         else {
