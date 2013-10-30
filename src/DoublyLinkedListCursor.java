@@ -1,5 +1,5 @@
 
-class DoublyLinkedListCursor<T> implements Cursor {
+class DoublyLinkedListCursor<T> implements Cursor<T> {
 	Node<T> pos;
 	
 	/**
